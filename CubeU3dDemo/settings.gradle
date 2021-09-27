@@ -1,0 +1,4 @@
+rootProject.name = "CubeU3dDemo"
+include ':app'
+include ':unityLibrary'
+project(':unityLibrary').projectDir=new File('.\\unityLibrary')

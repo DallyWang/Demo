@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="root_parent" type="id" />
+    <item name="root_start" type="id" />
+    <item name="root_finish" type="id" />
+    <item name="root_unity_player" type="id" />
+</resources>
