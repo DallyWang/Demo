@@ -20,9 +20,11 @@ import com.unity3d.player.UnityPlayerActivity;
  * 2021/9/14
  **/
 public class MainUnityActivity extends UnityPlayerActivity {
+    private static final String TAG = "UnityPlayerActivity";
 
     private TextView startUnity;
     private TextView finishUnity;
+    private TextView showUnity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +36,12 @@ public class MainUnityActivity extends UnityPlayerActivity {
 
         startUnity = appendView.findViewById(R.id.start);
         finishUnity = appendView.findViewById(R.id.pause);
+        showUnity = appendView.findViewById(R.id.show);
         startUnity.setOnClickListener(v -> {
             mUnityPlayer.resume();
             //UnityPlayer.UnitySendMessage("Canvas","OnTimeResult",text);方法的意思是调用名称为Canvas对象上的OnTimeResult方法，传入的参数为text。
             UnityPlayer.UnitySendMessage(Constant.BUTTON, Constant.ANDROID_MSG, "android btn");
-            Log.d("WDY", "startUnity");
+            Log.d(TAG, "startUnity");
 
         });
 
@@ -62,4 +65,19 @@ public class MainUnityActivity extends UnityPlayerActivity {
             finish();
         }
     }
+
+    /**
+     * 为unity提供方法,注意线程问题
+     * @param s
+     */
+    public void javaMethodForUnity(String s) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                showUnity.setText(s);
+                Log.d(TAG, "C#javaMethodForUnity");
+            }
+        });
+    }
+
 }
